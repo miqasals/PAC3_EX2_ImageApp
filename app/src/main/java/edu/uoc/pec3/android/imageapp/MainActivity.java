@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == mButtonOpenImage) {
-            // launching an intent to get an image from some gallery app
+            // launching an intent to get an image from camera
         }
     }
 }
