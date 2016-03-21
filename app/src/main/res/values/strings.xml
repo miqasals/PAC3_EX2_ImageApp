@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ImageApp</string>
+    <!-- Text -->
+    <string name="text_no_image">No image selected</string>
+    <!-- Button -->
+    <string name="button_open_new_image">Open new image from gallery</string>
+</resources>
