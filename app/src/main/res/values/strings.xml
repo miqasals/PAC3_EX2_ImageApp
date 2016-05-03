@@ -4,4 +4,15 @@
     <string name="text_no_image">No image selected</string>
     <!-- Button -->
     <string name="button_open_new_image">CAPTURE NEW IMAGE</string>
+    <string name="captured_image">Captured image</string>
+    <string name="save_image_toast">Imatge guardada correctament</string>
+    <string name="delete_image_toast">Imatge eliminada correctament</string>
+    <string name="delete_dialog_message">Do you want to delete this image?</string>
+    <string name="delete_dialog_title">Delete image</string>
+    <string name="delete_dialog_positive_btn">YES</string>
+    <string name="delete_dialog_negative_btn">NO</string>
+    <string name="permissions_denied_msg">Storage permissions denied. Accept via settings aplication.</string>
+    <string name="delete_ico_title">Delete image</string>
+    <string name="save_ico_title">Save image</string>
+    <string name="storage_unmounted_toast">External storage not ready.</string>
 </resources>
