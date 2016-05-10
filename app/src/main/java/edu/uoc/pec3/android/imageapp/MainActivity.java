@@ -194,9 +194,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
              */
             if (intent.resolveActivity(getPackageManager()) != null) {
                 // Start the activity and wait for result.
-
-                // TODO: afegir arxiu per guardar la foto en gran format. Pendent de confirmar....
-
                 startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
             }
         }
