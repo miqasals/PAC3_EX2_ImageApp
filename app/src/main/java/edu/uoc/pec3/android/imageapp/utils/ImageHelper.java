@@ -65,6 +65,7 @@ public class ImageHelper {
      */
     public void save() throws IOException {
         FileOutputStream os = new FileOutputStream(file);
+        //Compress the image to the stream with full quality and jpg format.
         image.compress(Bitmap.CompressFormat.JPEG, 100, os);
         os.close();
     }

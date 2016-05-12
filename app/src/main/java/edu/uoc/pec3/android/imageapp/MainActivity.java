@@ -1,11 +1,13 @@
 package edu.uoc.pec3.android.imageapp;
 
 import android.Manifest;
+import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -40,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Helpers
     private ImageHelper ihelper;
 
+    // Flag
+    private boolean imageActive;    //Controls if exist an image to save.
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (ihelper.exists()) {
                     ihelper.setImage(BitmapFactory.decodeFile(ihelper.getAbsolutePath()));
                     // Sets the layout.
-                    mImageView.setImageBitmap(ihelper.getImage());
-                    mTextView.setVisibility(View.INVISIBLE);
+                    setImageView(1);
                 }
             }
         }
@@ -96,11 +100,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (id) {
             case R.id.saveImage:
                 // If save button presed
-                saveImage();
+                if (imageActive) saveImage();
                 return true;
             case R.id.deleteImage:
                 // If delete button pressed.
-                deleteImage();
+                if (imageActive) deleteImage();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -156,11 +160,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             // Behaviour on press YES
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // Clear the image in layout.
-                                mImageView.setImageResource(android.R.color.transparent);
-                                mTextView.setVisibility(View.VISIBLE);
                                 // Delete image from external storage.
                                 ihelper.delete();
+                                // Sets the view
+                                setImageView(0);
                                 // Send toast message to user.
                                 Toast.makeText(getApplicationContext(), R.string.delete_image_toast,
                                         Toast.LENGTH_LONG).show();
@@ -185,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v == mButtonOpenImage) {    // Quant es fa un click en la View mButtonOpenImage. ######
+        if (v == mButtonOpenImage) {
             // launching an intent to get an image from camera
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             /*
@@ -213,16 +216,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ihelper.setImage((Bitmap) extras.get("data"));
 
             // Sets the layout.
-            mImageView.setImageBitmap(ihelper.getImage());
-            mTextView.setVisibility(View.INVISIBLE);
+            setImageView(1);
         }
     }
 
 
-
-
-
-
-
-
+    /**
+     * This function sets the view depending the user action.
+     * @param mode Denote if the function show an image or delete it.
+     */
+    private void setImageView (int mode) {
+        if (mode == 1){
+            mImageView.setImageBitmap(ihelper.getImage());
+            mTextView.setVisibility(View.INVISIBLE);
+            imageActive = true;
+        } else if (mode == 0){
+            // Clear the image in layout.
+            mImageView.setImageResource(android.R.color.transparent);
+            mTextView.setVisibility(View.VISIBLE);
+            imageActive = false;
+        }
+    }
 }
